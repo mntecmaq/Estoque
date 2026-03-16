@@ -31,7 +31,7 @@ if choice == "estoque Atual":
             if row['qtd'] <= 0:
                 st.error(f"🚨 PRODUTO ZERADO: {row['nome']}")
             elif row['qtd'] <= row['estoque_min']:
-                st.warning(f"⚠️ Stock Baixo: {row['nome']} (Apenas {row['qtd']} un)")
+                st.warning(f"⚠️ estoque Baixo: {row['nome']} (Apenas {row['qtd']} un)")
         
         st.dataframe(df, use_container_width=True)
     else:
