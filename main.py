@@ -19,15 +19,15 @@ choice = st.sidebar.selectbox("Menu de Navegação", menu)
 
 # --- 1. STOCK ATUAL & ALERTAS ---
 if choice == "Stock Atual":
-    st.subheader("📋 Status do Inventário em Tempo Real")
+   st.subheader("📋 Status do Inventário em Tempo Real")
     
     # Executa a busca
-    response = supabase.table("produtos").select("*").execute()
+   response = supabase.table("produtos").select("*").execute()
 st.write(response)
 
     # Verifica se há dados
     if response.data:
-        df = pd.DataFrame(response.data)
+    df = pd.DataFrame(response.data)
         
         # Garante que os nomes das colunas no Pandas estejam corretos
         df = df.rename(columns={
