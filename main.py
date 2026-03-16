@@ -18,7 +18,7 @@ menu = ["estoque Atual", "Cadastrar Fornecedor", "Entrada (Compra)", "Saída (Us
 choice = st.sidebar.selectbox("Menu de Navegação", menu)
 
 # --- 1. STOCK ATUAL & ALERTAS ---
-if choice == "estoque Atual":
+if choice == "Stock Atual":
     st.subheader("📋 Status do Inventário em Tempo Real")
     
     # Busca dados da tabela 'produtos' no Supabase
@@ -37,15 +37,22 @@ if choice == "estoque Atual":
     else:
         st.info("Nenhum produto cadastrado ainda.")
 
-# --- 2. CADASTRAR FORNECEDOR ---
+# --- 2. CADASTRO DE FORNECEDOR ---
 elif choice == "Cadastrar Fornecedor":
     st.subheader("🚚 Novo Fornecedor")
-    with st.form("form_fornecedor"):
+    
+    # Criamos um formulário para garantir que nada rode sem o clique no botão
+    with st.form("form_fornecedor", clear_on_submit=True):
         nome_f = st.text_input("Nome da Empresa/Vendedor")
         contato = st.text_input("Telefone ou E-mail")
-        if st.form_submit_button("Salvar Fornecedor"):
-            supabase.table("fornecedores").insert({"nome": nome_f, "contato": contato}).execute()
-            st.success("Fornecedor guardado na nuvem!")
+        submit = st.form_submit_button("Salvar Fornecedor")
+        
+        if submit:
+            if nome_f and contato:
+                supabase.table("fornecedores").insert({"nome": nome_f, "contato": contato}).execute()
+                st.success(f"Fornecedor {nome_f} cadastrado!")
+            else:
+                st.warning("Por favor, preencha todos os campos.")
 
 # --- 3. ENTRADA DE MATERIAL ---
 elif choice == "Entrada (Compra)":
