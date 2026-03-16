@@ -21,21 +21,32 @@ choice = st.sidebar.selectbox("Menu de Navegação", menu)
 if choice == "Stock Atual":
     st.subheader("📋 Status do Inventário em Tempo Real")
     
-    # Busca dados da tabela 'produtos' no Supabase
+    # Executa a busca
     response = supabase.table("produtos").select("*").execute()
+    
+    # Verifica se há dados
     if response.data:
         df = pd.DataFrame(response.data)
         
+        # Garante que os nomes das colunas no Pandas estejam corretos
+        df = df.rename(columns={
+            "nome": "Produto",
+            "qtd": "Quantidade",
+            "estoque_min": "Estoque Mínimo"
+        })
+        
+        # Mostra a tabela limpa
+        st.dataframe(df[['Produto', 'Quantidade', 'Estoque Mínimo']], use_container_width=True)
+        
         # Lógica de Alertas
         for _, row in df.iterrows():
-            if row['qtd'] <= 0:
-                st.error(f"🚨 PRODUTO ZERADO: {row['nome']}")
-            elif row['qtd'] <= row['estoque_min']:
-                st.warning(f"⚠️ estoque Baixo: {row['nome']} (Apenas {row['qtd']} un)")
-        
-        st.dataframe(df, use_container_width=True)
+            if row['Quantidade'] <= 0:
+                st.error(f"🚨 PRODUTO ZERADO: {row['Produto']}")
+            elif row['Quantidade'] <= row['Estoque Mínimo']:
+                st.warning(f"⚠️ Stock Baixo: {row['Produto']} (Apenas {row['Quantidade']} un)")
     else:
-        st.info("Nenhum produto cadastrado ainda.")
+        st.info("Nenhum produto cadastrado no estoque ainda.")
+
 
 # --- 2. CADASTRO DE FORNECEDOR ---
 elif choice == "Cadastrar Fornecedor":
