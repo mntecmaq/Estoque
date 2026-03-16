@@ -11,14 +11,14 @@ SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # --- INTERFACE STREAMLIT ---
-st.set_page_config(page_title="Gestão de Stock Profissional", layout="wide")
-st.title("🛠️ Sistema de Gestão de Stock (Nuvem)")
+st.set_page_config(page_title="Gestão de estoque Profissional", layout="wide")
+st.title("🛠️ Sistema de Gestão de estoque (Nuvem)")
 
-menu = ["Stock Atual", "Cadastrar Fornecedor", "Entrada (Compra)", "Saída (Uso/Venda)"]
+menu = ["estoque Atual", "Cadastrar Fornecedor", "Entrada (Compra)", "Saída (Uso/Venda)"]
 choice = st.sidebar.selectbox("Menu de Navegação", menu)
 
 # --- 1. STOCK ATUAL & ALERTAS ---
-if choice == "Stock Atual":
+if choice == "estoque Atual":
     st.subheader("📋 Status do Inventário em Tempo Real")
     
     # Busca dados da tabela 'produtos' no Supabase
@@ -59,7 +59,7 @@ elif choice == "Entrada (Compra)":
         forn_choice = st.selectbox("Selecione o Fornecedor", lista_forn)
         produto_nome = st.text_input("Nome do Produto")
         qtd_entrada = st.number_input("Quantidade Comprada", min_value=1)
-        est_min = st.number_input("Alerta de stock mínimo (un)", min_value=1)
+        est_min = st.number_input("Alerta de estoque mínimo (un)", min_value=1)
         
         if st.form_submit_button("Confirmar Entrada"):
             # Verifica se produto já existe
@@ -79,7 +79,7 @@ elif choice == "Entrada (Compra)":
                 "qtd": qtd_entrada,
                 "origem_destino": forn_choice
             }).execute()
-            st.success("Stock atualizado com sucesso!")
+            st.success("estoque atualizado com sucesso!")
 
 # --- 4. SAÍDA DE MATERIAL ---
 elif choice == "Saída (Uso/Venda)":
