@@ -23,9 +23,7 @@ if choice == "Stock Atual":
     
     # Executa a busca
     response = supabase.table("produtos").select("*").execute()
-
-    st.write(response) 
-# Isso vai mostrar o que o Supabase está te respondendo na tela do celular
+st.write(response)
 
     # Verifica se há dados
     if response.data:
