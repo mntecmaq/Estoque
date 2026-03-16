@@ -6,7 +6,7 @@ from datetime import datetime
 # --- CONFIGURAÇÃO SUPABASE ---
 # Substitua pelos dados que copiou do seu painel Supabase
 SUPABASE_URL = "https://idbhzlgzaqbmaultxlwc.supabase.co"
-SUPABASE_KEY = "sb_publishable_8rUoS8DC5k1ynketviuFHQ__2StHoM1"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlkYmh6bGd6YXFibWF1bHR4bHdjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2MTU1MTUsImV4cCI6MjA4OTE5MTUxNX0.JSECB48WC_z-tY4U3kD7yluTFBqerxf0pStDGOVuWbA"
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
