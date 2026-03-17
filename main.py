@@ -18,26 +18,25 @@ menu = ["estoque Atual", "Cadastrar Fornecedor", "Entrada (Compra)", "Saída (Us
 choice = st.sidebar.selectbox("Menu de Navegação", menu)
 
 # --- 1. STOCK ATUAL & ALERTAS ---
-    if choice == "Stock Atual": st.subheader("Status do Inventário em Tempo Real")
+if choice == "estoque Atual":
+    st.subheader("Status do Inventário em Tempo Real")
     
     # Executa a busca
-    response =
-    supabase.table("produtos").select("*").execute()
-    st.write(response)
-
+    response = supabase.table("produtos").select("*").execute()
+    
     # Verifica se há dados
     if response.data:
         df = pd.DataFrame(response.data)
         
         # Garante que os nomes das colunas no Pandas estejam corretos
-    df = df.rename(columns={
+        df = df.rename(columns={
             "nome": "Produto",
             "qtd": "Quantidade",
             "estoque_min": "Estoque Mínimo"
         })
         
         # Mostra a tabela limpa
-    st.dataframe(df[['Produto', 'Quantidade', 'Estoque Mínimo']], use_container_width=True)
+        st.dataframe(df[['Produto', 'Quantidade', 'Estoque Mínimo']], use_container_width=True)
         
         # Lógica de Alertas
         for _, row in df.iterrows():
@@ -63,7 +62,7 @@ elif choice == "Cadastrar Fornecedor":
         
         # A lógica só roda se o botão for pressionado
         if submit_button:
-            if nome_f: # Verifica se o nome não está vazio
+            if nome_f:  # Verifica se o nome não está vazio
                 supabase.table("fornecedores").insert({"nome": nome_f, "contato": contato}).execute()
                 st.success(f"Fornecedor {nome_f} cadastrado com sucesso!")
             else:
@@ -131,39 +130,3 @@ elif choice == "Saída (Uso/Venda)":
                 st.success(f"Saída registada!")
             else:
                 st.error("Quantidade insuficiente!")
-    est_min = st.number_input("Alerta de estoque mínimo (un)", min_value=1)
-    
-    if st.button("Confirmar Entrada"):
-        # Verifica se produto já existe
-        res = conn.execute("SELECT id, qtd FROM produtos WHERE nome = ?", (produto_nome,)).fetchone()
-        if res:
-            nova_qtd = res[1] + qtd_entrada
-            conn.execute("UPDATE produtos SET qtd = ? WHERE id = ?", (nova_qtd, res[0]))
-        else:
-            conn.execute("INSERT INTO produtos (nome, qtd, estoque_min) VALUES (?,?,?)", 
-                         (produto_nome, qtd_entrada, est_min))
-        
-        conn.execute("INSERT INTO movimentacoes (data, tipo, produto_id, qtd, destino_origem) VALUES (?,?,?,?,?)",
-                     (datetime.now().strftime("%d/%m/%Y %H:%M"), "ENTRADA", produto_nome, qtd_entrada, forn_choice))
-        conn.commit()
-        st.success("Estoque atualizado!")
-
-# --- 4. SAÍDA DE MATERIAL ---
-elif choice == "Saída (Uso/Venda)":
-    st.subheader("📤 Registrar Uso ou Venda")
-    produtos = pd.read_sql_query("SELECT nome FROM produtos WHERE qtd > 0", conn)
-    prod_choice = st.selectbox("Produto a retirar", produtos['nome'].tolist())
-    qtd_saida = st.number_input("Quantidade", min_value=1)
-    destino = st.text_input("Destino (Ex: Cliente João / Técnico Silva / OS 452)")
-    
-    if st.button("Confirmar Saída"):
-        res = conn.execute("SELECT id, qtd FROM produtos WHERE nome = ?", (prod_choice,)).fetchone()
-        if res[1] >= qtd_saida:
-            nova_qtd = res[1] - qtd_saida
-            conn.execute("UPDATE produtos SET qtd = ? WHERE id = ?", (nova_qtd, res[0]))
-            conn.execute("INSERT INTO movimentacoes (data, tipo, produto_id, qtd, destino_origem) VALUES (?,?,?,?,?)",
-                         (datetime.now().strftime("%d/%m/%Y %H:%M"), "SAÍDA", prod_choice, qtd_saida, destino))
-            conn.commit()
-            st.success(f"Saída de {prod_choice} registrada para {destino}!")
-        else:
-            st.error("Quantidade insuficiente no estoque!")
