@@ -47,7 +47,6 @@ if choice == "estoque Atual":
     else:
         st.info("Nenhum produto cadastrado no estoque ainda.")
 
-
 # --- 2. CADASTRO DE FORNECEDOR ---
 elif choice == "Cadastrar Fornecedor":
     st.subheader("🚚 Novo Fornecedor")
@@ -56,7 +55,7 @@ elif choice == "Cadastrar Fornecedor":
     with st.form("form_fornecedor", clear_on_submit=True):
         nome_f = st.text_input("Nome da Empresa/Vendedor")
         contato = st.text_input("Telefone ou E-mail")
-        end = st.text_input("Telefone ou E-mail")
+        endereco = st.text_input("Endereço")
         
         # O botão agora é a única porta de entrada para o banco
         submit_button = st.form_submit_button("Salvar Fornecedor")
@@ -64,7 +63,7 @@ elif choice == "Cadastrar Fornecedor":
         # A lógica só roda se o botão for pressionado
         if submit_button:
             if nome_f:  # Verifica se o nome não está vazio
-                supabase.table("fornecedores").insert({"nome": nome_f, "contato": contato}).execute()
+                supabase.table("fornecedores").insert({"nome": nome_f, "contato": contato, "endereco": endereco}).execute()
                 st.success(f"Fornecedor {nome_f} cadastrado com sucesso!")
             else:
                 st.warning("O nome do fornecedor é obrigatório.")
