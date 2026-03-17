@@ -16,6 +16,14 @@ st.title("🛠️ Sistema de Gestão de estoque (Nuvem)")
 
 menu = ["estoque Atual", "Cadastrar Fornecedor", "Entrada (Compra)", "Saída (Uso/Venda)"]
 choice = st.sidebar.selectbox("Menu de Navegação", menu)
+# Adicione após a linha 18:
+menu = ["estoque Atual"]
+choice = st.sidebar.selectbox("Menu de Navegação", menu)
+
+# Fechar/esconder o sidebar após seleção
+if choice:
+    st.sidebar.write("")  # Placeholder para fechar visualmente
+
 
 # --- 1. STOCK ATUAL & ALERTAS ---
 if choice == "estoque Atual":
