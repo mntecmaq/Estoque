@@ -17,7 +17,7 @@ st.title("🛠️ Sistema de Gestão de estoque (Nuvem)")
 #menu = ["estoque Atual", "Cadastrar Fornecedor", "Entrada (Compra)", "Saída (Uso/Venda)"]
 #choice = st.sidebar.selectbox("Menu de Navegação", menu)
 # Adicione após a linha 18:
-menu = ["estoque Atual"]
+menu = ["estoque Atual", "Cadastrar Fornecedor", "Entrada (Compra)", "Saída (Uso/Venda)"]
 choice = st.sidebar.selectbox("Menu de Navegação", menu)
 
 # Fechar/esconder o sidebar após seleção
