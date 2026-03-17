@@ -56,6 +56,7 @@ elif choice == "Cadastrar Fornecedor":
     with st.form("form_fornecedor", clear_on_submit=True):
         nome_f = st.text_input("Nome da Empresa/Vendedor")
         contato = st.text_input("Telefone ou E-mail")
+        end = st.text_input("Telefone ou E-mail")
         
         # O botão agora é a única porta de entrada para o banco
         submit_button = st.form_submit_button("Salvar Fornecedor")
