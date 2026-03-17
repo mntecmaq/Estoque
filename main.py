@@ -30,7 +30,7 @@ st.write(response)
     df = pd.DataFrame(response.data)
         
         # Garante que os nomes das colunas no Pandas estejam corretos
-        df = df.rename(columns={
+    df = df.rename(columns={
             "nome": "Produto",
             "qtd": "Quantidade",
             "estoque_min": "Estoque Mínimo"
