@@ -22,7 +22,7 @@ if choice == "Stock Atual":
    st.subheader("📋 Status do Inventário em Tempo Real")
     
     # Executa a busca
-   response = supabase.table("produtos").select("*").execute()
+    response = supabase.table("produtos").select("*").execute()
 st.write(response)
 
     # Verifica se há dados
