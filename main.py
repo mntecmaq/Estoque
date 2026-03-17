@@ -22,8 +22,9 @@ choice = st.sidebar.selectbox("Menu de Navegação", menu)
     st.subheader("📋 Status do Inventário em Tempo Real")
     
     # Executa a busca
-    response = supabase.table("produtos").select("*").execute()
-st.write(response)
+    response =
+    supabase.table("produtos").select("*").execute()
+    st.write(response)
 
     # Verifica se há dados
     if response.data:
