@@ -18,8 +18,8 @@ menu = ["estoque Atual", "Cadastrar Fornecedor", "Entrada (Compra)", "Saída (Us
 choice = st.sidebar.selectbox("Menu de Navegação", menu)
 
 # --- 1. STOCK ATUAL & ALERTAS ---
-    if choice == "Stock Atual":
-    st.subheader("📋 Status do Inventário em Tempo Real")
+if choice == "Stock Atual":
+st.subheader("📋 Status do Inventário em Tempo Real")
     
     # Executa a busca
     response = supabase.table("produtos").select("*").execute()
