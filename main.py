@@ -61,7 +61,7 @@ elif choice == "Cadastrar Fornecedor":
     
     # Criamos um formulário para encapsular os campos
     with st.form("form_fornecedor", clear_on_submit=True):
-        nome = st.text_input("Nome da Empresa/Vendedor")
+        nome_f = st.text_input("Nome da Empresa/Vendedor")
         contato = st.text_input("Telefone ou E-mail")
         endereco = st.text_input("Endereço")
         
