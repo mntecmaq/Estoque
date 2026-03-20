@@ -70,8 +70,8 @@ elif choice == "Cadastrar Fornecedor":
         
         # A lógica só roda se o botão for pressionado
         if submit_button:
-            if nome:  # Verifica se o nome não está vazio
-                supabase.table("fornecedor").insert({"nome": nome_f, "contato": fone_f, "endereco": end_f}).execute()
+            if nome_f:  # Verifica se o nome não está vazio
+                supabase.table("fornecedor").insert({"nome_f": nome_f, "contato": fone_f, "endereco": end_f}).execute()
                 st.success(f"Fornecedor {nome_f} cadastrado com sucesso!")
             else:
                 st.warning("O nome do fornecedor é obrigatório.")
