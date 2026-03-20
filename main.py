@@ -61,8 +61,8 @@ elif choice == "Cadastrar Fornecedor":
     
     # Criamos um formulário para encapsular os campos
     with st.form("form_fornecedor", clear_on_submit=True):
-        cod_f = st.text_input("codigo do fornecedor")
-        nome_f = st.text_input("Nome da Empresa/Vendedor")
+        codigo = st.text_input("codigo do fornecedor")
+        nome = st.text_input("Nome da Empresa/Vendedor")
         contato = st.text_input("Telefone ou E-mail")
         endereco = st.text_input("Endereço")
         
@@ -71,7 +71,7 @@ elif choice == "Cadastrar Fornecedor":
         
         # A lógica só roda se o botão for pressionado
         if submit_button:
-            if nome_f:  # Verifica se o nome não está vazio
+            if nome:  # Verifica se o nome não está vazio
                 supabase.table("fornecedor").insert({"cod_f": cod_f, "nome_f": nome_f, "contato": fone_f, "endereco": end_f}).execute()
                 st.success(f"Fornecedor {nome_f} cadastrado com sucesso!")
             else:
