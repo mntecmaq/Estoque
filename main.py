@@ -61,8 +61,8 @@ elif choice == "Cadastrar Fornecedor":
     
     # Criamos um formulário para encapsular os campos
     with st.form("form_fornecedor", clear_on_submit=True):
-        nome_f = st.text_input("Nome da Empresa/Vendedor")
-        fone_f = st.text_input("Telefone ou E-mail")
+        nome = st.text_input("Nome da Empresa/Vendedor")
+        contato = st.text_input("Telefone ou E-mail")
         endereco = st.text_input("Endereço")
         
         # O botão agora é a única porta de entrada para o banco
@@ -71,7 +71,7 @@ elif choice == "Cadastrar Fornecedor":
         # A lógica só roda se o botão for pressionado
         if submit_button:
             if nome_f:  # Verifica se o nome não está vazio
-                supabase.table("fornecedores").insert({"nome": nome_f, "contato": fone_f, "endereco": end_f}).execute()
+                supabase.table("fornecedor").insert({"nome": nome_f, "contato": fone_f, "endereco": end_f}).execute()
                 st.success(f"Fornecedor {nome_f} cadastrado com sucesso!")
             else:
                 st.warning("O nome do fornecedor é obrigatório.")
@@ -81,7 +81,7 @@ elif choice == "Entrada (Compra)":
     st.subheader("📥 Registrar Compra")
     
     # Carregar fornecedores para o selectbox
-    forn_data = supabase.table("fornecedores").select("nome").execute()
+    forn_data = supabase.table("fornecedor").select("nome_f").execute()
     lista_forn = [f['nome'] for f in forn_data.data] if forn_data.data else []
     
     with st.form("form_entrada"):
