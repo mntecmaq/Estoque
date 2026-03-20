@@ -62,7 +62,7 @@ elif choice == "Cadastrar Fornecedor":
     # Criamos um formulário para encapsular os campos
     with st.form("form_fornecedor", clear_on_submit=True):
         nome_f = st.text_input("Nome da Empresa/Vendedor")
-        contato = st.text_input("Telefone ou E-mail")
+        fone_f = st.text_input("Telefone ou E-mail")
         endereco = st.text_input("Endereço")
         
         # O botão agora é a única porta de entrada para o banco
@@ -71,7 +71,7 @@ elif choice == "Cadastrar Fornecedor":
         # A lógica só roda se o botão for pressionado
         if submit_button:
             if nome_f:  # Verifica se o nome não está vazio
-                supabase.table("fornecedor").insert({"nome_f": nome_f, "contato": fone_f, "endereco": end_f}).execute()
+                supabase.table("fornecedor").insert({"nome_f": nome_f, "fone_f": fone_f, "endereco": end_f}).execute()
                 st.success(f"Fornecedor {nome_f} cadastrado com sucesso!")
             else:
                 st.warning("O nome do fornecedor é obrigatório.")
