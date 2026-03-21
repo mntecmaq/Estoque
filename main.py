@@ -43,7 +43,7 @@ if choice == "estoque Atual":
             "estoque_min": "Estoque Mínimo"
         })
 
-   # Mostra a tabela limpa
+        # Mostra a tabela limpa
         st.dataframe(df[['Produto', 'Quantidade', 'Estoque Mínimo']], use_container_width=True)
 
 
