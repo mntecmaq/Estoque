@@ -30,7 +30,7 @@ if choice == "estoque Atual":
     st.subheader("Status do Inventário em Tempo Real")
 
     # Executa a busca
-    response = supabase.table("produtos").select("*").execute():
+    response = supabase.table("produtos").select("*").execute()
 
     # Verifica se há dados
     if response.data:
@@ -70,8 +70,9 @@ elif choice == "Cadastrar Fornecedor":
 
         # A lógica só roda se o botão for pressionado
         if submit_button:
-            if nome:  # Verifica se o nome não está vazio
+        if nome:    # Verifica se o nome não está vazio
                 supabase.table("fornecedor").insert({"nome_f": nome, "fone_f": fone_f, "local_f": local_f,}).execute()
+
                 st.success(f"Fornecedor {nome} cadastrado com sucesso!")
             else:
                 st.warning("O nome do fornecedor é obrigatório.")
