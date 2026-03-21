@@ -139,4 +139,5 @@ elif choice == "Saída (Uso/Venda)":
                 }).execute()
                 st.success(f"Saída registada!")
             else:
-                st.error("Quantidade insuficiente!")"""
+                st.error("Quantidade insuficiente!")
+"""
