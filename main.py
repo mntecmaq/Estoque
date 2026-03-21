@@ -54,8 +54,8 @@ if choice == "estoque Atual":
                 st.warning(f"⚠️ Stock Baixo: {row['Produto']} (Apenas {row['Quantidade']} un)")
     else:
         st.info("Nenhum produto cadastrado no estoque ainda.")
-"""
-# --- 2. CADASTRO DE FORNECEDOR ---
+
+"""# --- 2. CADASTRO DE FORNECEDOR ---
 elif choice == "Cadastrar Fornecedor":
     st.subheader("🚚 Novo Fornecedor")
 
