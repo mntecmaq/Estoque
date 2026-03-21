@@ -55,7 +55,8 @@ if choice == "estoque Atual":
     else:
         st.info("Nenhum produto cadastrado no estoque ainda.")
 
-"""# --- 2. CADASTRO DE FORNECEDOR ---
+"""
+#--- 2. CADASTRO DE FORNECEDOR ---
 elif choice == "Cadastrar Fornecedor":
     st.subheader("🚚 Novo Fornecedor")
 
