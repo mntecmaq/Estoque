@@ -46,7 +46,7 @@ if choice == "estoque Atual":
         # Mostra a tabela limpa
         st.dataframe(df[['Produto', 'Quantidade', 'Estoque Mínimo']], use_container_width=True)
 
-     """# Lógica de Alertas
+        # Lógica de Alertas
         for _, row in df.iterrows():
             if row['Quantidade'] <= 0:
                 st.error(f"🚨 PRODUTO ZERADO: {row['Produto']}")
@@ -54,7 +54,7 @@ if choice == "estoque Atual":
                 st.warning(f"⚠️ Stock Baixo: {row['Produto']} (Apenas {row['Quantidade']} un)")
     else:
         st.info("Nenhum produto cadastrado no estoque ainda.")
-
+"""
 # --- 2. CADASTRO DE FORNECEDOR ---
 elif choice == "Cadastrar Fornecedor":
     st.subheader("🚚 Novo Fornecedor")
