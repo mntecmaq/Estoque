@@ -51,8 +51,8 @@ if choice == "estoque Atual":
         for _, row in df.iterrows():
             if row['qnt_prd'] <= 0:
                 st.error(f"🚨 PRODUTO ZERADO: {row['Produto']}")
-            elif row['qnt_prd'] <= row['Estoque Mínimo']:
-                st.warning(f"⚠️ Stock Baixo: {row['Produto']} (Apenas {row['qnt_prd']} un)")
+            elif row['Quantidade'] <= row['Estoque Mínimo']:
+                st.warning(f"⚠️ Stock Baixo: {row['Produto']} (Apenas {row['Quantidade']} un)")
     else:
         st.info("Nenhum produto cadastrado no estoque ainda.")
 
