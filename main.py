@@ -44,7 +44,7 @@ if choice == "estoque Atual":
         })
 
         # Mostra a tabela limpa
-        st.dataframe(df[['Produto', 'Quantidade', 'Estoque Mínimo']], use_container_width=True)
+        st.dataframe(df[['fornecedor', 'cod_prd', 'descricao', 'qnt_prd']], use_container_width=True)
 
         # Lógica de Alertas
         for _, row in df.iterrows():
