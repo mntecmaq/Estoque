@@ -49,7 +49,7 @@ if choice == "estoque Atual":
 
         # Lógica de Alertas
         for _, row in df.iterrows():
-            if row['qnt_prd'] <= 0:
+            if row['Quantidade'] <= 0:
                 st.error(f"🚨 PRODUTO ZERADO: {row['Produto']}")
             elif row['Quantidade'] <= row['Estoque Mínimo']:
                 st.warning(f"⚠️ Stock Baixo: {row['Produto']} (Apenas {row['Quantidade']} un)")
