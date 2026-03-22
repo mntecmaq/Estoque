@@ -24,7 +24,7 @@ choice = st.sidebar.selectbox("Menu de Navegação", menu)
 if choice:
     st.sidebar.write("")  # Placeholder para fechar visualmente
 
-# --- 1. REGISTRO DE CLIENTES ---
+# --- REGISTRO DE CLIENTES ---
 if choice == "Cadastro de Cliente":
     st.subheader("Novo Cliente")
 
@@ -42,7 +42,7 @@ if choice == "Cadastro de Cliente":
             if nome_cli:    # Verifica se o nome não está vazio
                 supabase.table("cliente").insert({"nome_cli": nome, "fone_cli": fone_cli, "local_cli": local_cli,}).execute()
 
-                st.success(f"Cliente {nome} cadastrado com sucesso!")
+                st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
             else:
                 st.warning("O nome do cliente é obrigatório.")
 
