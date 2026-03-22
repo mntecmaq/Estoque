@@ -98,17 +98,17 @@ elif choice == "Entrada (Compra)":
             res = supabase.table("produtos").select("*").eq("produto", produto_nome).execute()
 
             if res.data:
-                nova_qtd = res.data[0]['qnt_prd'] + qtd_entrada
-                supabase.table("produtos").update({"qnt_prd": nova_qtd}).eq("produto", produto_nome).execute()
+                nova_qtd = res.data[0]['qtd_prd'] + qtd_entrada
+                supabase.table("produtos").update({"qtd_prd": nova_qtd}).eq("produto", produto_nome).execute()
             else:
-                supabase.table("produtos").insert({"fornecedor": forn_choice, "produto": produto_nome, "qnt_prd": qtd_entrada, "estmin": estoque_min}).execute()
+                supabase.table("produtos").insert({"fornecedor": forn_choice, "produto": produto_nome, "qtd_prd": qtd_entrada, "estmin": estoque_min}).execute()
 
             # Regista histórico
             supabase.table("movimentacoes").insert({
                 "data": datetime.now().isoformat(),
                 "tipo": "ENTRADA",
                 "produto": produto_nome,
-                "qnt_prd": qtd_entrada,
+                "qtd_prd": qtd_entrada,
                 "origem_destino": forn_choice
             }).execute()
             st.success("estoque atualizado com sucesso!")
