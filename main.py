@@ -39,7 +39,7 @@ if choice == "Cadastro de Cliente":
 
         # A lógica só roda se o botão for pressionado
         if submit_button:
-            if nome:    # Verifica se o nome não está vazio
+            if nome_cli:    # Verifica se o nome não está vazio
                 supabase.table("cliente").insert({"nome_cli": nome, "fone_cli": fone_cli, "local_cli": local_cli,}).execute()
 
                 st.success(f"Cliente {nome} cadastrado com sucesso!")
