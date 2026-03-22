@@ -35,35 +35,16 @@ if choice == "Cadastro de Cliente":
         local_cli = st.text_input("Endereço")
 
         # O botão agora é a única porta de entrada para o banco
-       # submit_button = st.form_submit_button("Salvar Cliente")
+        submit_button = st.form_submit_button("Salvar Cliente")
 
         # A lógica só roda se o botão for pressionado
-		
-		if submit_button:
-    # Verifica se o nome existe E se o telefone contém apenas números
-    if nome_cli and fone_cli.isdigit(): 
-        supabase.table("cliente").insert({
-            "nome_cli": nome_cli, 
-            "fone_cli": fone_cli, 
-            "local_cli": local_cli
-        }).execute()
-        st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
-        
-    elif not nome_cli:
-        st.warning("O nome do cliente é obrigatório.")
-        
-    else:
-        # Se caiu aqui, é porque fone_cli não é só número
-        st.error("O campo telefone aceita apenas números (sem espaços ou traços).")
+        if submit_button:
+            if nome_cli and fone_cli.isdigit():    # Verifica se o nome não está vazio
+                supabase.table("cliente").insert({"nome_cli": nome_cli, "fone_cli": fone_cli, "local_cli": local_cli,}).execute()
 
-		
-        #if submit_button:
-         #   if nome_cli:    # Verifica se o nome não está vazio
-          #      supabase.table("cliente").insert({"nome_cli": nome_cli, "fone_cli": fone_cli, "local_cli": local_cli,}).execute()
-
-           #     st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
-            #else:
-             #   st.warning("O nome do cliente é obrigatório.")
+                st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
+            else:
+                st.warning("O nome do cliente é obrigatório.")
 
 # --- 2. STOCK ATUAL & ALERTAS ---
 elif choice == "Estoque Atual":
