@@ -30,10 +30,10 @@ elif choice == "Cadastro de Cliente":
     st.subheader("Novo Cliente")
 
     # Criamos um formulário para encapsular os campos
-    with st.form("form_fornecedor", clear_on_submit=True):
-        nome = st.text_input("Nome da Empresa/Vendedor")
-        fone_f = st.text_input("Telefone ou E-mail")
-        local_f = st.text_input("Endereço")
+    with st.form("form_cliente", clear_on_submit=True):
+        nome_cli = st.text_input("Nome do cliente")
+        fone_cli = st.text_input("Telefone ou E-mail")
+        local_cli = st.text_input("Endereço")
 
         # O botão agora é a única porta de entrada para o banco
         submit_button = st.form_submit_button("Salvar Fornecedor")
