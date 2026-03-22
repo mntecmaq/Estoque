@@ -95,13 +95,13 @@ elif choice == "Entrada (Compra)":
 
         if st.form_submit_button("Confirmar Entrada"):
             # Verifica se produto já existe
-            res = supabase.table("produtos").select("*").eq("descricao", produto_nome).execute()
+            res = supabase.table("produtos").select("*").eq("produto", produto_nome).execute()
 
             if res.data:
                 nova_qtd = res.data[0]['qnt_prd'] + qtd_entrada
-                supabase.table("produtos").update({"qnt_prd": nova_qtd}).eq("descricao", produto_nome).execute()
+                supabase.table("produtos").update({"qnt_prd": nova_qtd}).eq("produto", produto_nome).execute()
             else:
-                supabase.table("produtos").insert({"descricao": produto_nome, "qnt_prd": qtd_entrada, "estoque_min": est_min}).execute()
+                supabase.table("produtos").insert({"produto": produto_nome, "qnt_prd": qtd_entrada, "estoque_min": est_min}).execute()
 
             # Regista histórico
             supabase.table("movimentacoes").insert({
