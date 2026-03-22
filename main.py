@@ -90,8 +90,8 @@ elif choice == "Entrada (Compra)":
     with st.form("form_entrada"):
         forn_choice = st.selectbox("Selecione o Fornecedor", lista_forn)
         produto_nome = st.text_input("Nome do Produto")
-        qtd_entrada = st.text_input("Quantidade Comprada", min_value=1)
-        estoque_min = st.text_input("Alerta de estoque mínimo (un)", min_value=1)
+        qtd_entrada = st.number_input("Quantidade Comprada", min_value=1)
+        estoque_min = st.number_input("Alerta de estoque mínimo (un)", min_value=1)
 
         if st.form_submit_button("Confirmar Entrada"):
             # Verifica se produto já existe
