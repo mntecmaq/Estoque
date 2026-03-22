@@ -41,7 +41,7 @@ if choice == "Cadastro de Cliente":
         if submit_button:
                 if nome_cli and fone_cli.isdigit():
 				supabase.table("cliente").insert({"nome_cli": nome_cli, "fone_cli": fone_cli, "local_cli": local_cli}).execute()
-        st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
+					st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
 
 					elif not nome_cli:
 					st.warning("O nome do cliente é obrigatório.")
