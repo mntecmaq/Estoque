@@ -126,7 +126,7 @@ elif choice == "Saída (Uso/Venda)":
         destino = st.text_input("Destino (Ex: Cliente João / OS 452)")
 
         if st.form_submit_button("Confirmar Saída"):
-            res = supabase.table("produtos").select("id", "qtd").eq("nome", prod_choice).execute()
+            res = supabase.table("produtos").select("id", "qnt_prd").eq("produto", prod_choice).execute()
             if res.data and res.data[0]['qtd'] >= qtd_saida:
                 nova_qtd = res.data[0]['qtd'] - qtd_saida
                 supabase.table("produtos").update({"qtd": nova_qtd}).eq("id", res.data[0]['id']).execute()
