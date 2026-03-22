@@ -33,6 +33,10 @@ if choice == "Cadastro de Cliente":
 		nome_cli = st.text_input("Nome do cliente")
 		fone_cli = st.text_input("Telefone/Whatsapp")
 		logradouro_cli = st.text_input("Endereço")
+		num_cli = st.text_input("numero da casa")
+		bairro_cli = st.text_input("Bairro")
+		obs_cli = st.text_input("Obs para o cliente")
+		comp_cli = st.text_input("Obs para o cliente")
 
         # O botão agora é a única porta de entrada para o banco
 		submit_button = st.form_submit_button("Salvar Cliente")
