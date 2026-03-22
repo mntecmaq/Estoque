@@ -24,6 +24,28 @@ choice = st.sidebar.selectbox("Menu de Navegação", menu)
 if choice:
     st.sidebar.write("")  # Placeholder para fechar visualmente
 
+# --- REGISTRO DE CLIENTES ---
+
+elif choice == "Cadastro de Cliente":
+    st.subheader("Novo Cliente")
+
+    # Criamos um formulário para encapsular os campos
+    with st.form("form_fornecedor", clear_on_submit=True):
+        nome = st.text_input("Nome da Empresa/Vendedor")
+        fone_f = st.text_input("Telefone ou E-mail")
+        local_f = st.text_input("Endereço")
+
+        # O botão agora é a única porta de entrada para o banco
+        submit_button = st.form_submit_button("Salvar Fornecedor")
+
+        # A lógica só roda se o botão for pressionado
+        if submit_button:
+            if nome:    # Verifica se o nome não está vazio
+                supabase.table("fornecedor").insert({"nome_f": nome, "fone_f": fone_f, "local_f": local_f,}).execute()
+
+                st.success(f"Fornecedor {nome} cadastrado com sucesso!")
+            else:
+                st.warning("O nome do fornecedor é obrigatório.")
 
 # --- 1. STOCK ATUAL & ALERTAS ---
 if choice == "Estoque Atual":
