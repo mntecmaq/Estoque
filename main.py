@@ -93,14 +93,14 @@ elif choice == "Entrada (Compra)":
         qtd_entrada = st.number_input("Quantidade Comprada", min_value=1)
         estmin = st.number_input("Alerta de estoque mínimo (un)", min_value=1)
 
-       # if st.form_submit_button("Confirmar Entrada"):
-            # Verifica se produto já existe
-         #   res = supabase.table("produtos").select("*").eq("produto", produto_nome).execute()
+        if st.form_submit_button("Confirmar Entrada"):
+             #Verifica se produto já existe
+            res = supabase.table("produtos").select("*").eq("produto", produto_nome).execute()
 
-           # if res.data:
-              #  nova_qtd = res.data[0]['qnt_prd'] + qtd_entrada
-              #  supabase.table("produtos").update({"qnt_prd": nova_qtd}).eq("produto", produto_nome).execute()
-            else:
+            if res.data:
+                nova_qtd = res.data[0]['qnt_prd'] + qtd_entrada
+                supabase.table("produtos").update({"qnt_prd": nova_qtd}).eq("produto", produto_nome).execute()
+        else:
                 supabase.table("produtos").insert({"produto": produto_nome, "qnt_prd": qtd_entrada, "estmin": estmin}).execute()
 
             # Regista histórico
