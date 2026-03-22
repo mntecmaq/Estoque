@@ -98,7 +98,7 @@ elif choice == "Entrada (Compra)":
             res = supabase.table("produtos").select("*").eq("descricao", produto_nome).execute()
 
             if res.data:
-                nova_qtd = res.data[0]['qtd'] + qtd_entrada
+                nova_qtd = res.data[0]['qtd_prd'] + qtd_entrada
                 supabase.table("produtos").update({"qtd_prd": nova_qtd}).eq("nome", produto_nome).execute()
             else:
                 supabase.table("produtos").insert({"nome": produto_nome, "qtd_prd": qtd_entrada, "estoque_min": est_min}).execute()
