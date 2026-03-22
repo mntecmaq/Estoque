@@ -48,7 +48,7 @@ if choice == "Cadastro de Cliente":
 
 			else:
 				# Se caiu aqui, é porque fone_cli não é só número
-				st.error("O campo telefone aceita apenas números (sem espaços ou traços)").
+				st.error("O campo telefone aceita apenas números (sem espaços ou traços)")
 
             #else:
                # st.warning("O nome do cliente é obrigatório.")
