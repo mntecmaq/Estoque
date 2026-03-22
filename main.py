@@ -40,7 +40,7 @@ if choice == "estoque Atual":
         df = df.rename(columns={
          #   "cod_prd": "ID",
             "produto": "Produto",
-            "qtd_prd": "Quantidade",
+            "qnt_prd": "Quantidade",
             "estmin": "Estoque Mínimo"
         })
 
@@ -98,17 +98,17 @@ elif choice == "Entrada (Compra)":
             res = supabase.table("produtos").select("*").eq("produto", produto_nome).execute()
 
             if res.data:
-                nova_qtd = res.data[0]['qtd_prd'] + qtd_entrada
-                supabase.table("produtos").update({"qtd_prd": nova_qtd}).eq("produto", produto_nome).execute()
+                nova_qtd = res.data[0]['qnt_prd'] + qtd_entrada
+                supabase.table("produtos").update({"qnt_prd": nova_qtd}).eq("produto", produto_nome).execute()
             else:
-                supabase.table("produtos").insert({"fornecedor": forn_choice, "produto": produto_nome, "qtd_prd": qtd_entrada, "estmin": estoque_min}).execute()
+                supabase.table("produtos").insert({"fornecedor": forn_choice, "produto": produto_nome, "qnt_prd": qtd_entrada, "estmin": estoque_min}).execute()
 
             # Regista histórico
             supabase.table("movimentacoes").insert({
                 "data": datetime.now().isoformat(),
                 "tipo": "ENTRADA",
                 "produto": produto_nome,
-                "qtd_prd": qtd_entrada,
+                "qnt_prd": qtd_entrada,
                 "origem_destino": forn_choice
             }).execute()
             st.success("estoque atualizado com sucesso!")
@@ -117,7 +117,7 @@ elif choice == "Entrada (Compra)":
 elif choice == "Saída (Uso/Venda)":
     st.subheader("📤 Registrar Uso ou Venda")
 
-    prod_data = supabase.table("produtos").select("produto").gt("qtd_prd", 0).execute()
+    prod_data = supabase.table("produtos").select("produto").gt("qnt_prd", 0).execute()
     lista_prod = [p['produto'] for p in prod_data.data] if prod_data.data else []
 
     with st.form("form_saida"):
@@ -126,7 +126,7 @@ elif choice == "Saída (Uso/Venda)":
         destino = st.text_input("Destino (Ex: Cliente João / OS 452)")
 
         if st.form_submit_button("Confirmar Saída"):
-            res = supabase.table("produtos").select("id", "qtd_prd").eq("nome", prod_choice).execute()
+            res = supabase.table("produtos").select("id", "qnt_prd").eq("nome", prod_choice).execute()
             if res.data and res.data[0]['qtd'] >= qtd_saida:
                 nova_qtd = res.data[0]['qtd'] - qtd_saida
                 supabase.table("produtos").update({"qtd": nova_qtd}).eq("id", res.data[0]['id']).execute()
