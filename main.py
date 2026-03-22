@@ -99,9 +99,9 @@ elif choice == "Entrada (Compra)":
 
             if res.data:
                 nova_qtd = res.data[0]['qnt_prd'] + qtd_entrada
-                supabase.table("produtos").update({"qnt_prd": nova_qtd}).eq("nome", produto_nome).execute()
+                supabase.table("produtos").update({"qnt_prd": nova_qtd}).eq("descricao", produto_nome).execute()
             else:
-                supabase.table("produtos").insert({"nome": produto_nome, "qnt_prd": qtd_entrada, "estoque_min": est_min}).execute()
+                supabase.table("produtos").insert({"descricao": produto_nome, "qnt_prd": qtd_entrada, "estoque_min": est_min}).execute()
 
             # Regista histórico
             supabase.table("movimentacoes").insert({
