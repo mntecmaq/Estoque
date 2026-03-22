@@ -41,13 +41,14 @@ if choice == "Cadastro de Cliente":
         if submit_button:
             if nome_cli and fone_cli.isdigit():    # Verifica se o nome não está vazio
                 supabase.table("cliente").insert({"nome_cli": nome_cli, "fone_cli": fone_cli, "local_cli": local_cli,}).execute()
+				st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
 			elif not nome_cli:
 				st.warning("O nome do cliente é obrigatório.")
         
 			else:
 				# Se caiu aqui, é porque fone_cli não é só número
 				st.error("O campo telefone aceita apenas números (sem espaços ou traços).
-                st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
+                
             #else:
                # st.warning("O nome do cliente é obrigatório.")
 
