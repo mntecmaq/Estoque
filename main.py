@@ -31,7 +31,7 @@ if choice == "Cadastro de Cliente":
     # Criamos um formulário para encapsular os campos
 	with st.form("form_cliente", clear_on_submit=True):
 		nome_cli = st.text_input("Nome do cliente")
-		fone_cli = st.text_input("Telefone ou E-mail")
+		fone_cli = st.text_input("Telefone/Whatsapp")
 		local_cli = st.text_input("Endereço")
 
         # O botão agora é a única porta de entrada para o banco
