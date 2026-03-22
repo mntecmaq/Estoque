@@ -117,7 +117,7 @@ elif choice == "Entrada (Compra)":
 elif choice == "Saída (Uso/Venda)":
     st.subheader("📤 Registrar Uso ou Venda")
 
-    prod_data = supabase.table("produtos").select("nome").gt("qtd", 0).execute()
+    prod_data = supabase.table("produtos").select("produto").gt("qnt_prd", 0).execute()
     lista_prod = [p['nome'] for p in prod_data.data] if prod_data.data else []
 
     with st.form("form_saida"):
