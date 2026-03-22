@@ -127,15 +127,15 @@ elif choice == "Saída (Uso/Venda)":
 
         if st.form_submit_button("Confirmar Saída"):
             res = supabase.table("produtos").select("id", "qnt_prd").eq("produto", prod_choice).execute()
-            if res.data and res.data[0]['qtd'] >= qtd_saida:
-                nova_qtd = res.data[0]['qtd'] - qtd_saida
-                supabase.table("produtos").update({"qtd": nova_qtd}).eq("id", res.data[0]['id']).execute()
+            if res.data and res.data[0]['qnt_prd'] >= qtd_saida:
+                nova_qtd = res.data[0]['qnt_prd'] - qtd_saida
+                supabase.table("produtos").update({"qnt_prd": nova_qtd}).eq("id", res.data[0]['id']).execute()
 
                 supabase.table("movimentacoes").insert({
                     "data": datetime.now().isoformat(),
                     "tipo": "SAÍDA",
                     "produto": prod_choice,
-                    "qtd": qtd_saida,
+                    "qnt_prd": qtd_saida,
                     "origem_destino": destino
                 }).execute()
                 st.success(f"Saída registada!")
