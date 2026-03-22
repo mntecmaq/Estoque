@@ -43,7 +43,7 @@ if choice == "Cadastro de Cliente":
 					supabase.table("cliente").insert({"nome_cli": nome_cli, "fone_cli": fone_cli, "local_cli": local_cli}).execute()
 					st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
 
-					elif not nome_cli:
+				elif not nome_cli:
 					st.warning("O nome do cliente é obrigatório.")
 
 				else:
