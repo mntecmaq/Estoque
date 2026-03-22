@@ -14,10 +14,10 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 st.set_page_config(page_title="Gestão de estoque Profissional", layout="wide")
 st.title("🛠️ Sistema de Gestão de estoque (Nuvem)")
 
-#menu = ["Cadastro de Cliente", "Estoque Atual", "Cadastrar Fornecedor", "Entrada (Compra)", "Saída (Uso/Venda)"]
+#menu = ["Cadastro de Cliente", "Estoque Atual", "Cadastrar Fornecedor", "Entrada (Compra)", "Saída (Uso/Venda)", "Serviços (OS)"]
 #choice = st.sidebar.selectbox("Menu de Navegação", menu)
 # Adicione após a linha 18:
-menu = ["Cadastro de Cliente", "Estoque Atual", "Cadastrar Fornecedor", "Entrada (Compra)", "Saída (Uso/Venda)"]
+menu = ["Cadastro de Cliente", "Estoque Atual", "Cadastrar Fornecedor", "Entrada (Compra)", "Saída (Uso/Venda)", "OS"]
 choice = st.sidebar.selectbox("Menu de Navegação", menu)
 
 # Fechar/esconder o sidebar após seleção
