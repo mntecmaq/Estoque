@@ -100,9 +100,8 @@ elif choice == "Entrada (Compra)":
             if res.data:
                 nova_qtd = res.data[0]['qnt_prd'] + qtd_entrada
                 supabase.table("produtos").update({"qnt_prd": nova_qtd}).eq("produto", produto_nome).execute()
-            else:
-                supabase.table("produtos").insert({"produto": produto_nome, "qnt_prd": qtd_entrada, "estoque_min": estmin}).execute()
-
+			else:
+				supabase.table("produtos").insert({"produto": produto_nome, "qnt_prd": qtd_entrada, "estoque_min": estmin}).execute()
             # Regista histórico
             supabase.table("movimentacoes").insert({
                 "data": datetime.now().isoformat(),
@@ -113,8 +112,8 @@ elif choice == "Entrada (Compra)":
             }).execute()
             st.success("estoque atualizado com sucesso!")
 
-# --- 4. SAÍDA DE MATERIAL ---
-elif choice == "Saída (Uso/Venda)":
+	# --- 4. SAÍDA DE MATERIAL ---
+		elif choice == "Saída (Uso/Venda)":
     st.subheader("📤 Registrar Uso ou Venda")
 
     prod_data = supabase.table("produtos").select("nome").gt("qtd", 0).execute()
