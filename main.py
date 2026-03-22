@@ -38,14 +38,14 @@ if choice == "estoque Atual":
 
         # Garante que os nomes das colunas no Pandas estejam corretos
         df = df.rename(columns={
-            "cod_prd": "ID",
+         #   "cod_prd": "ID",
             "produto": "Produto",
             "qnt_prd": "Quantidade",
             "estmin": "Estoque Mínimo"
         })
 
         # Mostra a tabela limpa
-        st.dataframe(df[['ID', 'Produto', 'Quantidade', 'Estoque Mínimo']], use_container_width=True)
+        st.dataframe(df[['Produto', 'Quantidade', 'Estoque Mínimo']], use_container_width=True)
 
 
         # Lógica de Alertas
