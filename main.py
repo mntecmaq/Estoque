@@ -26,7 +26,7 @@ if choice:
 
 
 # --- 1. STOCK ATUAL & ALERTAS ---
-if choice == "estoque Atual":
+if choice == "Estoque Atual":
     st.subheader("Status do Inventário em Tempo Real")
 
     # Executa a busca
