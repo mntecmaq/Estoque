@@ -38,16 +38,16 @@ if choice == "Cadastro de Cliente":
         submit_button = st.form_submit_button("Salvar Cliente")
 
         # A lógica só roda se o botão for pressionado
-        if submit_button:
+			if submit_button:
 		
-			if nome_cli and fone_cli.isdigit():
-				supabase.table("cliente").insert({"nome_cli": nome_cli, "fone_cli": fone_cli, "local_cli": local_cli}).execute()
-					st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
+				if nome_cli and fone_cli.isdigit():
+					supabase.table("cliente").insert({"nome_cli": nome_cli, "fone_cli": fone_cli, "local_cli": local_cli}).execute()
+						st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
 
 					elif not nome_cli:
 					st.warning("O nome do cliente é obrigatório.")
         
-			else:
+				else:
 				# Se caiu aqui, é porque fone_cli não é só número
 				st.error("O campo telefone aceita apenas números (sem espaços ou traços).
                 
