@@ -25,7 +25,7 @@ if choice:
     st.sidebar.write("")  # Placeholder para fechar visualmente
 
 # --- 1. REGISTRO DE CLIENTES ---
-elif choice == "Cadastro de Cliente":
+if choice == "Cadastro de Cliente":
     st.subheader("Novo Cliente")
 
     # Criamos um formulário para encapsular os campos
@@ -47,7 +47,7 @@ elif choice == "Cadastro de Cliente":
                 st.warning("O nome do cliente é obrigatório.")
 
 # --- 1. STOCK ATUAL & ALERTAS ---
-if choice == "Estoque Atual":
+elif choice == "Estoque Atual":
     st.subheader("Status do Inventário em Tempo Real")
 
     # Executa a busca
