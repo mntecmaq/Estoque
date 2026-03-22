@@ -98,8 +98,8 @@ elif choice == "Entrada (Compra)":
             res = supabase.table("produtos").select("*").eq("produto", produto_nome).execute()
 
             if res.data:
-              #  nova_qtd = res.data[0]['qnt_prd'] + qtd_entrada
-              #  supabase.table("produtos").update({"qnt_prd": nova_qtd}).eq("produto", produto_nome).execute()
+                nova_qtd = res.data[0]['qnt_prd'] + qtd_entrada
+                supabase.table("produtos").update({"qnt_prd": nova_qtd}).eq("produto", produto_nome).execute()
             else:
                 supabase.table("produtos").insert({"produto": produto_nome, "qnt_prd": qtd_entrada, "estmin": estmin}).execute()
 
