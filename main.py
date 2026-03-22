@@ -24,7 +24,7 @@ choice = st.sidebar.selectbox("Menu de Navegação", menu)
 if choice:
     st.sidebar.write("")  # Placeholder para fechar visualmente
 
-# --- REGISTRO DE CLIENTES ---
+# --- 1. REGISTRO DE CLIENTES ---
 
 elif choice == "Cadastro de Cliente":
     st.subheader("Novo Cliente")
@@ -41,11 +41,11 @@ elif choice == "Cadastro de Cliente":
         # A lógica só roda se o botão for pressionado
         if submit_button:
             if nome:    # Verifica se o nome não está vazio
-                supabase.table("fornecedor").insert({"nome_f": nome, "fone_f": fone_f, "local_f": local_f,}).execute()
+                supabase.table("cliente").insert({"nome_cli": nome, "fone_cli": fone_cli, "local_cli": local_cli,}).execute()
 
-                st.success(f"Fornecedor {nome} cadastrado com sucesso!")
+                st.success(f"Cliente {nome} cadastrado com sucesso!")
             else:
-                st.warning("O nome do fornecedor é obrigatório.")
+                st.warning("O nome do cliente é obrigatório.")
 
 # --- 1. STOCK ATUAL & ALERTAS ---
 if choice == "Estoque Atual":
