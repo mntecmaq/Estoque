@@ -32,15 +32,14 @@ if choice == "Cadastro de Cliente":
     with st.form("form_cliente", clear_on_submit=True):
         nome_cli = st.text_input("Nome do cliente")
         fone_cli = st.text_input("Telefone ou E-mail")
-        local_cli = st.text_input("Endereço")
+		local_cli = st.text_input("Endereço")
 
         # O botão agora é a única porta de entrada para o banco
-        submit_button = st.form_submit_button("Salvar Cliente")
+		submit_button = st.form_submit_button("Salvar Cliente")
 
         # A lógica só roda se o botão for pressionado
-			if submit_button:
-		
-				if nome_cli and fone_cli.isdigit():
+		if submit_button:
+			if nome_cli and fone_cli.isdigit():
 					supabase.table("cliente").insert({"nome_cli": nome_cli, "fone_cli": fone_cli, "local_cli": local_cli}).execute()
 						st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
 
