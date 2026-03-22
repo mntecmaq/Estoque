@@ -22,22 +22,22 @@ choice = st.sidebar.selectbox("Menu de Navegação", menu)
 
 # Fechar/esconder o sidebar após seleção
 if choice:
-    st.sidebar.write("")  # Placeholder para fechar visualmente
+	st.sidebar.write("")  # Placeholder para fechar visualmente
 
 # --- 1. REGISTRO DE CLIENTES ---
 if choice == "Cadastro de Cliente":
-    st.subheader("Novo Cliente")
+	st.subheader("Novo Cliente")
 
     # Criamos um formulário para encapsular os campos
-    with st.form("form_cliente", clear_on_submit=True):
-        nome_cli = st.text_input("Nome do cliente")
-        fone_cli = st.text_input("Telefone ou E-mail")
+	with st.form("form_cliente", clear_on_submit=True):
+		nome_cli = st.text_input("Nome do cliente")
+		fone_cli = st.text_input("Telefone ou E-mail")
 		local_cli = st.text_input("Endereço")
 
         # O botão agora é a única porta de entrada para o banco
-		submit_button = st.form_submit_button("Salvar Cliente")
+			submit_button = st.form_submit_button("Salvar Cliente")
 
-        # A lógica só roda se o botão for pressionado
+		# A lógica só roda se o botão for pressionado
 		if submit_button:
 			if nome_cli and fone_cli.isdigit():
 					supabase.table("cliente").insert({"nome_cli": nome_cli, "fone_cli": fone_cli, "local_cli": local_cli}).execute()
@@ -45,11 +45,11 @@ if choice == "Cadastro de Cliente":
 
 					elif not nome_cli:
 					st.warning("O nome do cliente é obrigatório.")
-        
+
 				else:
 				# Se caiu aqui, é porque fone_cli não é só número
 				st.error("O campo telefone aceita apenas números (sem espaços ou traços).
-                
+
             #else:
                # st.warning("O nome do cliente é obrigatório.")
 
