@@ -85,7 +85,7 @@ elif choice == "Entrada (Compra)":
 
     # Carregar fornecedores para o selectbox
     forn_data = supabase.table("fornecedor").select("nome_f").execute()
-    lista_forn = [f['nome'] for f in forn_data.data] if forn_data.data else []
+    lista_forn = [f['nome_f'] for f in forn_data.data] if forn_data.data else []
 
     with st.form("form_entrada"):
         forn_choice = st.selectbox("Selecione o Fornecedor", lista_forn)
