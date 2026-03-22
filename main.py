@@ -24,7 +24,7 @@ choice = st.sidebar.selectbox("Menu de Navegação", menu)
 if choice:
     st.sidebar.write("")  # Placeholder para fechar visualmente
 
-# --- REGISTRO DE CLIENTES ---
+# --- 1. REGISTRO DE CLIENTES ---
 if choice == "Cadastro de Cliente":
     st.subheader("Novo Cliente")
 
@@ -38,15 +38,34 @@ if choice == "Cadastro de Cliente":
         submit_button = st.form_submit_button("Salvar Cliente")
 
         # A lógica só roda se o botão for pressionado
-        if submit_button:
-            if nome_cli:    # Verifica se o nome não está vazio
-                supabase.table("cliente").insert({"nome_cli": nome_cli, "fone_cli": fone_cli, "local_cli": local_cli}).execute()
+		
+		if submit_button:
+    # Verifica se o nome existe E se o telefone contém apenas números
+    if nome_cli and fone_cli.isdigit(): 
+        supabase.table("cliente").insert({
+            "nome_cli": nome_cli, 
+            "fone_cli": fone_cli, 
+            "local_cli": local_cli
+        }).execute()
+        st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
+        
+    elif not nome_cli:
+        st.warning("O nome do cliente é obrigatório.")
+        
+    else:
+        # Se caiu aqui, é porque fone_cli não é só número
+        st.error("O campo telefone aceita apenas números (sem espaços ou traços).")
 
-                st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
-            else:
-                st.warning("O nome do cliente é obrigatório.")
+		
+        #if submit_button:
+         #   if nome_cli:    # Verifica se o nome não está vazio
+          #      supabase.table("cliente").insert({"nome_cli": nome_cli, "fone_cli": fone_cli, "local_cli": local_cli,}).execute()
 
-# --- 1. STOCK ATUAL & ALERTAS ---
+           #     st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
+            #else:
+             #   st.warning("O nome do cliente é obrigatório.")
+
+# --- 2. STOCK ATUAL & ALERTAS ---
 elif choice == "Estoque Atual":
     st.subheader("Status do Inventário em Tempo Real")
 
@@ -78,7 +97,7 @@ elif choice == "Estoque Atual":
     else:
         st.info("Nenhum produto cadastrado no estoque ainda.")
 
-# --- 2. CADASTRO DE FORNECEDOR ---
+# --- 3. CADASTRO DE FORNECEDOR ---
 elif choice == "Cadastrar Fornecedor":
     st.subheader("🚚 Novo Fornecedor")
 
@@ -100,7 +119,7 @@ elif choice == "Cadastrar Fornecedor":
             else:
                 st.warning("O nome do fornecedor é obrigatório.")
 
-# --- 3. ENTRADA DE MATERIAL ---
+# --- 4. ENTRADA DE MATERIAL ---
 elif choice == "Entrada (Compra)":
     st.subheader("📥 Registrar Compra")
 
@@ -134,7 +153,7 @@ elif choice == "Entrada (Compra)":
             }).execute()
             st.success("estoque atualizado com sucesso!")
 
-# --- 4. SAÍDA DE MATERIAL ---
+# --- 5. SAÍDA DE MATERIAL ---
 elif choice == "Saída (Uso/Venda)":
     st.subheader("📤 Registrar Uso ou Venda")
 
