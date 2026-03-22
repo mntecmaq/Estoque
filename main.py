@@ -35,7 +35,7 @@ if choice == "Cadastro de Cliente":
 		local_cli = st.text_input("Endereço")
 
         # O botão agora é a única porta de entrada para o banco
-			submit_button = st.form_submit_button("Salvar Cliente")
+		submit_button = st.form_submit_button("Salvar Cliente")
 
 		# A lógica só roda se o botão for pressionado
 		if submit_button:
