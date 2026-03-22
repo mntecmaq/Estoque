@@ -25,7 +25,6 @@ if choice:
     st.sidebar.write("")  # Placeholder para fechar visualmente
 
 # --- 1. REGISTRO DE CLIENTES ---
-
 elif choice == "Cadastro de Cliente":
     st.subheader("Novo Cliente")
 
