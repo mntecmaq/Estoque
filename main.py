@@ -39,7 +39,7 @@ if choice == "estoque Atual":
         # Garante que os nomes das colunas no Pandas estejam corretos
         df = df.rename(columns={
             "cod_prd": "ID",
-            "descricao": "Produto",
+            "produto": "Produto",
             "qnt_prd": "Quantidade",
             "estmin": "Estoque Mínimo"
         })
