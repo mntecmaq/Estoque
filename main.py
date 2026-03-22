@@ -93,7 +93,7 @@ elif choice == "Entrada (Compra)":
         qtd_entrada = st.number_input("Quantidade Comprada", min_value=1)
         estmin = st.number_input("Alerta de estoque mínimo (un)", min_value=1)
 
-        if st.form_submit_button("Confirmar Entrada"):
+       # if st.form_submit_button("Confirmar Entrada"):
             # Verifica se produto já existe
          #   res = supabase.table("produtos").select("*").eq("produto", produto_nome).execute()
 
