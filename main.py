@@ -95,7 +95,7 @@ elif choice == "Entrada (Compra)":
 
         if st.form_submit_button("Confirmar Entrada"):
             # Verifica se produto já existe
-            res = supabase.table("produtos").select("*").eq("produto", produto_nome).execute()
+            res = supabase.table("produtos").select("*").eq("produto", 'produto_nome').execute()
 
             if res.data:
                 nova_qtd = res.data[0]['qnt_prd'] + qtd_entrada
