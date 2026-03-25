@@ -31,7 +31,7 @@ if choice == "Cadastro de Cliente":
     # Criamos um formulário para encapsular os campos
 	with st.form("form_cliente", clear_on_submit=True):
 		nome_cli = st.text_input("Nome do cliente")
-		cpf_cli = st.text_input("CPF do cliente")
+		cpf_cli = st.number_input("CPF do cliente")
 		fone_cli = st.text_input("Telefone/Whatsapp")
 		logradouro_cli = st.text_input("Endereço")
 		num_cli = st.text_input("numero da casa")
@@ -45,7 +45,7 @@ if choice == "Cadastro de Cliente":
 		# A lógica só roda se o botão for pressionado
 		if submit_button:
 			if nome_cli and fone_cli.isdigit():
-					supabase.table("cliente").insert({"nome_cli": nome_cli, "cpf_cli": CPF_cli, "fone_cli": fone_cli, "logradouro_cli": logradouro_cli, "num_cli": num_cli, "bairro_cli": bairro_cli, "obs_cli": obs_cli, "comp_cli": comp_cli,}).execute()
+					supabase.table("cliente").insert({"nome_cli": nome_cli, "CPF_cli": cpf_cli, "fone_cli": fone_cli, "logradouro_cli": logradouro_cli, "num_cli": num_cli, "bairro_cli": bairro_cli, "obs_cli": obs_cli, "comp_cli": comp_cli,}).execute()
 					st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
 
 			elif not nome_cli:
