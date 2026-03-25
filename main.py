@@ -45,7 +45,7 @@ if choice == "Cadastro de Cliente":
 		# A lógica só roda se o botão for pressionado
 		if submit_button:
 			if nome_cli and fone_cli.isdigit():
-					supabase.table("cliente").insert({"nome_cli": nome_cli, "fone_cli": fone_cli, "logradouro_cli": logradouro_cli, "num_cli": num_cli, "bairro_cli": bairro_cli, "obs_cli": obs_cli, "comp_cli": comp_cli,}).execute()
+					supabase.table("cliente").insert({"nome_cli": nome_cli, "CPF_cli": cpf_cli, "fone_cli": fone_cli, "logradouro_cli": logradouro_cli, "num_cli": num_cli, "bairro_cli": bairro_cli, "obs_cli": obs_cli, "comp_cli": comp_cli,}).execute()
 					st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
 
 			elif not nome_cli:
