@@ -69,7 +69,7 @@ elif choice == "Estoque Atual":
 		df = pd.DataFrame(response.data)
 
         # Garante que os nomes das colunas no Pandas estejam corretos
-        df = df.rename(columns={
+		df = df.rename(columns={
          #   "cod_prd": "ID",
             "produto": "Produto",
             "qnt_prd": "Quantidade",
@@ -77,12 +77,12 @@ elif choice == "Estoque Atual":
         })
 
         # Mostra a tabela limpa
-        st.dataframe(df[['Produto', 'Quantidade', 'Estoque Mínimo']], use_container_width=True)
+		st.dataframe(df[['Produto', 'Quantidade', 'Estoque Mínimo']], use_container_width=True)
 
 
         # Lógica de Alertas
-        for _, row in df.iterrows():
-            if row['Quantidade'] <= 0:
+		for _, row in df.iterrows():
+			if row['Quantidade'] <= 0:
                 st.error(f"🚨 PRODUTO ZERADO: {row['Produto']}")
             elif row['Quantidade'] <= row['Estoque Mínimo']:
                 st.warning(f"⚠️ Stock Baixo: {row['Produto']} (Apenas {row['Quantidade']} un)")
