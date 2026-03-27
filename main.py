@@ -65,8 +65,8 @@ elif choice == "Estoque Atual":
     response = supabase.table("produtos").select("*").execute()
 
     # Verifica se há dados
-    if response.data:
-        df = pd.DataFrame(response.data)
+	if response.data:
+		df = pd.DataFrame(response.data)
 
         # Garante que os nomes das colunas no Pandas estejam corretos
         df = df.rename(columns={
