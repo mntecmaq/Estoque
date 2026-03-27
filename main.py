@@ -58,8 +58,8 @@ if choice == "Cadastro de Cliente":
                # st.warning("O nome do cliente é obrigatório.")
 
 # --- 2. STOCK ATUAL & ALERTAS ---
- elif choice == "Estoque Atual":
-    st.subheader("Status do Inventário em Tempo Real")
+elif choice == "Estoque Atual":
+	st.subheader("Status do Inventário em Tempo Real")
 
     # Executa a busca
     response = supabase.table("produtos").select("*").execute()
