@@ -14,46 +14,46 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 st.set_page_config(page_title="Gestão de estoque Profissional", layout="wide")
 st.title("🛠️ Sistema de Gestão de estoque (Nuvem)")
 
-#menu = ["Cadastro de Cliente", "Estoque Atual", "Cadastrar Fornecedor", "Entrada (Compra)", "Saída (Uso/Venda)", "Serviços (OS)"]
+#menu = ["Cadastro de Cliente", "Estoque Atual", "Cadastrar Fornecedor", "Entrada (Compra)", "Saída (Uso/Venda)"]
 #choice = st.sidebar.selectbox("Menu de Navegação", menu)
 # Adicione após a linha 18:
-menu = ["Cadastro de Cliente", "Estoque Atual", "Cadastrar Fornecedor", "Entrada (Compra)", "Saída (Uso/Venda)", "OS"]
+menu = ["Cadastro de Cliente", "Estoque Atual", "Cadastrar Fornecedor", "Entrada (Compra)", "Saída (Uso/Venda)"]
 choice = st.sidebar.selectbox("Menu de Navegação", menu)
 
 # Fechar/esconder o sidebar após seleção
 if choice:
-    st.sidebar.write("")  # Placeholder para fechar visualmente
+	st.sidebar.write("")  # Placeholder para fechar visualmente
 
 # --- 1. REGISTRO DE CLIENTES ---
 if choice == "Cadastro de Cliente":
-    st.subheader("Novo Cliente")
+	st.subheader("Novo Cliente")
 
     # Criamos um formulário para encapsular os campos
-    with st.form("form_cliente", clear_on_submit=True):
-        nome_cli = st.text_input("Nome do cliente")
-        #cpf_cli = st.text_input("CPF do cliente")
-        fone_cli = st.text_input("Telefone/Whatsapp")
-        logradouro_cli = st.text_input("Endereço")
-        num_cli = st.text_input("numero da casa")
-        bairro_cli = st.text_input("Bairro")
-        obs_cli = st.text_input("Obs para o cliente")
-        comp_cli = st.text_input("complemento (ap, referencia, casa A...)")
+	with st.form("form_cliente", clear_on_submit=True):
+		nome_cli = st.text_input("Nome do cliente")
+		fone_cli = st.text_input("Telefone/Whatsapp")
+		logradouro_cli = st.text_input("Endereço")
+		num_cli = st.text_input("numero da casa")
+		bairro_cli = st.text_input("Bairro")
+		obs_cli = st.text_input("Obs para o cliente")
+		comp_cli = st.text_input("complemento (ap, referencia, casa A...)")
 
         # O botão agora é a única porta de entrada para o banco
-        submit_button = st.form_submit_button("Salvar Cliente")
+		submit_button = st.form_submit_button("Salvar Cliente")
 
-        # A lógica só roda se o botão for pressionado
-        if submit_button:
-            if nome_cli and fone_cli.isdigit():
-                    supabase.table("cliente").insert({"nome_cli": nome_cli, "fone_cli": fone_cli, "logradouro_cli": logradouro_cli, "num_cli": num_cli, "bairro_cli": bairro_cli, "obs_cli": obs_cli, "comp_cli": comp_cli,}).execute()
-                    st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
+		# A lógica só roda se o botão for pressionado
+		if submit_button:
+			if nome_cli and fone_cli.isdigit():
+					supabase.table("cliente").insert({"nome_cli": nome_cli, "fone_cli": fone_cli, "logradouro_cli": logradouro_cli, "num_cli": num_cli, "bairro_cli": bairro_cli, "obs_cli": obs_cli, "comp_cli": comp_cli,}).execute()
+					st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
 
-            elif not nome_cli:
-                    st.warning("O nome do cliente é obrigatório.")
+			elif not nome_cli:
+					st.warning("O nome do cliente é obrigatório.")
 
-            else:
-                # Se caiu aqui, é porque fone_cli não é só número
-                st.error("O campo telefone aceita apenas números (sem espaços ou traços)")
+			else:
+				# Se caiu aqui, é porque fone_cli não é só número
+				st.error("O campo telefone aceita apenas números (sem espaços ou traços)")
+
             #else:
                # st.warning("O nome do cliente é obrigatório.")
 
