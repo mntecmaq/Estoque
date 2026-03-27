@@ -22,54 +22,54 @@ choice = st.sidebar.selectbox("Menu de Navegação", menu)
 
 # Fechar/esconder o sidebar após seleção
 if choice:
-	st.sidebar.write("")  # Placeholder para fechar visualmente
+    st.sidebar.write("")  # Placeholder para fechar visualmente
 
 # --- 1. REGISTRO DE CLIENTES ---
 if choice == "Cadastro de Cliente":
-	st.subheader("Novo Cliente")
+    st.subheader("Novo Cliente")
 
     # Criamos um formulário para encapsular os campos
-	with st.form("form_cliente", clear_on_submit=True):
-		nome_cli = st.text_input("Nome do cliente")
-		#cpf_cli = st.text_input("CPF do cliente")
-		fone_cli = st.text_input("Telefone/Whatsapp")
-		logradouro_cli = st.text_input("Endereço")
-		num_cli = st.text_input("numero da casa")
-		bairro_cli = st.text_input("Bairro")
-		obs_cli = st.text_input("Obs para o cliente")
-		comp_cli = st.text_input("complemento (ap, referencia, casa A...)")
+    with st.form("form_cliente", clear_on_submit=True):
+        nome_cli = st.text_input("Nome do cliente")
+        #cpf_cli = st.text_input("CPF do cliente")
+        fone_cli = st.text_input("Telefone/Whatsapp")
+        logradouro_cli = st.text_input("Endereço")
+        num_cli = st.text_input("numero da casa")
+        bairro_cli = st.text_input("Bairro")
+        obs_cli = st.text_input("Obs para o cliente")
+        comp_cli = st.text_input("complemento (ap, referencia, casa A...)")
 
         # O botão agora é a única porta de entrada para o banco
-		submit_button = st.form_submit_button("Salvar Cliente")
+        submit_button = st.form_submit_button("Salvar Cliente")
 
-		# A lógica só roda se o botão for pressionado
-		if submit_button:
-			if nome_cli and fone_cli.isdigit():
-					supabase.table("cliente").insert({"nome_cli": nome_cli, "fone_cli": fone_cli, "logradouro_cli": logradouro_cli, "num_cli": num_cli, "bairro_cli": bairro_cli, "obs_cli": obs_cli, "comp_cli": comp_cli,}).execute()
-					st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
+        # A lógica só roda se o botão for pressionado
+        if submit_button:
+            if nome_cli and fone_cli.isdigit():
+                    supabase.table("cliente").insert({"nome_cli": nome_cli, "fone_cli": fone_cli, "logradouro_cli": logradouro_cli, "num_cli": num_cli, "bairro_cli": bairro_cli, "obs_cli": obs_cli, "comp_cli": comp_cli,}).execute()
+                    st.success(f"Cliente {nome_cli} cadastrado com sucesso!")
 
-			elif not nome_cli:
-					st.warning("O nome do cliente é obrigatório.")
+            elif not nome_cli:
+                    st.warning("O nome do cliente é obrigatório.")
 
-			else:
-				# Se caiu aqui, é porque fone_cli não é só número
-				st.error("O campo telefone aceita apenas números (sem espaços ou traços)")
-			#else:
+            else:
+                # Se caiu aqui, é porque fone_cli não é só número
+                st.error("O campo telefone aceita apenas números (sem espaços ou traços)")
+            #else:
                # st.warning("O nome do cliente é obrigatório.")
 
 # --- 2. STOCK ATUAL & ALERTAS ---
 elif choice == "Estoque Atual":
-	st.subheader("Status do Inventário em Tempo Real")
+    st.subheader("Status do Inventário em Tempo Real")
 
     # Executa a busca
-	response = supabase.table("produtos").select("*").execute()
+    response = supabase.table("produtos").select("*").execute()
 
     # Verifica se há dados
-	if response.data:
-		df = pd.DataFrame(response.data)
+    if response.data:
+        df = pd.DataFrame(response.data)
 
         # Garante que os nomes das colunas no Pandas estejam corretos
-		df = df.rename(columns={
+        df = df.rename(columns={
          #   "cod_prd": "ID",
             "produto": "Produto",
             "qnt_prd": "Quantidade",
@@ -77,12 +77,12 @@ elif choice == "Estoque Atual":
         })
 
         # Mostra a tabela limpa
-		st.dataframe(df[['Produto', 'Quantidade', 'Estoque Mínimo']], use_container_width=True)
+        st.dataframe(df[['Produto', 'Quantidade', 'Estoque Mínimo']], use_container_width=True)
 
 
         # Lógica de Alertas
-		for _, row in df.iterrows():
-			if row['Quantidade'] <= 0:
+        for _, row in df.iterrows():
+            if row['Quantidade'] <= 0:
                 st.error(f"🚨 PRODUTO ZERADO: {row['Produto']}")
             elif row['Quantidade'] <= row['Estoque Mínimo']:
                 st.warning(f"⚠️ Stock Baixo: {row['Produto']} (Apenas {row['Quantidade']} un)")
