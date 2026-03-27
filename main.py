@@ -56,7 +56,7 @@ if choice == "Cadastro de Cliente":
 				#st.error("O campo telefone aceita apenas números (sem espaços ou traços)")
 
             else:
-               # st.warning("O nome do cliente é obrigatório.")
+                st.warning("O nome do cliente é obrigatório.")
 
 # --- 2. STOCK ATUAL & ALERTAS ---
  elif choice == "Estoque Atual":
