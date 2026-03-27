@@ -62,7 +62,7 @@ elif choice == "Estoque Atual":
 	st.subheader("Status do Inventário em Tempo Real")
 
     # Executa a busca
-    response = supabase.table("produtos").select("*").execute()
+	response = supabase.table("produtos").select("*").execute()
 
     # Verifica se há dados
 	if response.data:
